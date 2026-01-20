@@ -10,3 +10,6 @@ docs/*
 # C files
 **/build/*
 
+# Mac files
+**/.DS_Store
+
