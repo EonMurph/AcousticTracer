@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 struct AT_Simulation {
-    AT_Voxel *voxels;
+    AT_Voxel *voxel_grid;
     AT_Ray *rays;
     AT_Vec3 origin;
     AT_Vec3 dimensions;
@@ -38,8 +38,8 @@ AT_Result AT_simulation_create(AT_Simulation **out_simulation, const AT_Scene *s
     float grid_z = (dimensions.z / settings->voxel_size) + 1;
     uint32_t num_voxels = (uint32_t){grid_x * grid_y * grid_z};
 
-    simulation->voxels = (AT_Voxel*)malloc(sizeof(AT_Voxel) * num_voxels);
-    if (!simulation->voxels) {
+    simulation->voxel_grid = (AT_Voxel*)malloc(sizeof(AT_Voxel) * num_voxels);
+    if (!simulation->voxel_grid) {
         free(simulation->rays);
         free(simulation);
         return AT_ERR_ALLOC_ERROR;
@@ -47,7 +47,7 @@ AT_Result AT_simulation_create(AT_Simulation **out_simulation, const AT_Scene *s
 
     // Gonna have to initialize a dynamic array for each voxel to store bins dynamically
     for (size_t i = 0; i < num_voxels; i++) {
-        AT_voxel_init(&simulation->voxels[i]);
+        AT_voxel_init(&simulation->voxel_grid[i]);
     }
 
     simulation->origin = scene->world_AABB.min;
