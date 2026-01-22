@@ -1,5 +1,5 @@
-#include "accoustic/at_scene.h"
-#include "accoustic/at.h"
+#include "acoustic/at_scene.h"
+#include "acoustic/at.h"
 
 #include <stdint.h>
 #include <stdlib.h>
