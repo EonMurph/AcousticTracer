@@ -49,7 +49,7 @@ typedef struct {
 
 // Model
 AT_Result AT_model_create(
-    AT_Model **model,
+    AT_Model **out_model,
     const char *filepath
 );
 
@@ -58,13 +58,13 @@ void AT_model_destroy(
 );
 
 void AT_model_to_AABB(
-    AT_AABB *aabb,
+    AT_AABB *out_aabb,
     const AT_Model *model
 );
 
 // Scene
 AT_Result AT_scene_create(
-    AT_Scene **scene,
+    AT_Scene **out_scene,
     const AT_SceneConfig* config
 );
 
@@ -75,7 +75,7 @@ void AT_scene_destroy(
 // Simulation
 // Creates the simulation "object" and allocates voxel memory
 AT_Result AT_simulation_create(
-    AT_Simulation **simulation,
+    AT_Simulation **out_simulation,
     const AT_Scene *scene,
     const AT_Settings *settings
 );
