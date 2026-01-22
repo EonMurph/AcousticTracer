@@ -9,7 +9,6 @@ struct AT_Scene {
     AT_Source *sources;
     AT_AABB world_AABB;
     uint32_t num_sources;
-    uint32_t num_rays;
     AT_Material material;
     const AT_Model *environment;
 };
@@ -25,7 +24,6 @@ AT_Result AT_scene_create(AT_Scene **out_scene, const AT_SceneConfig* config)
 
     scene->environment = config->environment;
     scene->material = config->material;
-    scene->num_rays = config->num_rays;
     scene->num_sources = config->num_sources;
 
     AT_model_to_AABB(&scene->world_AABB, config->environment);
