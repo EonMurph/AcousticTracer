@@ -133,7 +133,7 @@ The title of the commit should be less than 50 characters, any extra information
 
 ### Project Structure
 
-<pre><code style="color: white; font-size: 12pt">.
+<pre><code style="font-size: 12pt">.
 ├── core <em><sub>{Core C code for render calculations}</sub></em>
 │   └── src <sub><em>{Core C simulation code}</sub></em>
 │   └── core_dev <sub><em>{Debug code for the simulation}</sub></em>
