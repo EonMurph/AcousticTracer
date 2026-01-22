@@ -3,6 +3,7 @@
 
 # Documentation whitelist
 docs/*
+!docs/_config.yml
 !docs/*.md
 !docs/*.tex
 !docs/*.pdf
