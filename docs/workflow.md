@@ -134,18 +134,18 @@ The title of the commit should be less than 50 characters, any extra information
 ### Project Structure
 
 <pre><code style="font-size: 12pt">.
-├── core <em><sub>{Core C code for render calculations}</sub></em>
-│   └── src <sub><em>{Core C simulation code}</sub></em>
-│   └── core_dev <sub><em>{Debug code for the simulation}</sub></em>
-│   └── external_libs <sub><em>{External libraries}</sub></em>
-├── render <em><sub>{Code for rendering the scene}</sub></em>
-│   └── web <sub><em>{Backend code for web app}</sub></em>
-│   └── cli <sub><em>{Backend code for the terminal app}</sub></em>
-├── app <em><sub>{Code for web/C-ui frontend application}</sub></em>
-├── genetics <em><sub>{Code for optimizing the speaker placement}</sub></em>
-├── assets <em><sub>{Assets folder for code}</sub></em>
-│   └── glb <sub><em>{Object files defining points}</sub></em>
-├── blender <em><sub>{Blender files containing the simulated rooms}</sub></em>
-├── docs <em><sub>{Documentation for the project}</sub></em>
-└── contributors <em><sub>{Files specifying every ones contributions}</sub></em>
+├── core <sub><em>{Core C code for render calculations}</em></sub>
+│   └── src <sub><em>{Core C simulation code}</em></sub>
+│   └── core_dev <sub><em>{Debug code for the simulation}</em></sub>
+│   └── external_libs <sub><em>{External libraries}</em></sub>
+├── render <sub><em>{Code for rendering the scene}</em></sub>
+│   └── web <sub><em>{Backend code for web app}</em></sub>
+│   └── cli <sub><em>{Backend code for the terminal app}</em></sub>
+├── app <sub><em>{Code for web/C-ui frontend application}</em></sub>
+├── genetics <sub><em>{Code for optimizing the speaker placement}</em></sub>
+├── assets <sub><em>{Assets folder for code}</em></sub>
+│   └── glb <sub><em>{Object files defining points}</em></sub>
+├── blender <sub><em>{Blender files containing the simulated rooms}</em></sub>
+├── docs <sub><em>{Documentation for the project}</em></sub>
+└── contributors <sub><em>{Files specifying every ones contributions}</em></sub>
 </code></pre>
