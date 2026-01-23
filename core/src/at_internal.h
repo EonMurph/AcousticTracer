@@ -25,6 +25,10 @@ typedef struct {
     float t;
 } AT_RayHit;
 
+// dynamic array structure
+// called "items" instead of "bins" since the dynamic array macros are
+// to be universal, can use them with any types.
+// If we want, we can rewrite them to change items to bins to avoid confusion :|
 typedef struct {
     float *items; //bins
     size_t count;
