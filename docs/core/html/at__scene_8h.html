@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AcousticTracer: include/acoustic Directory Reference</title>
+<title>AcousticTracer: include/acoustic/at_scene.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,27 +65,60 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('dir_32685ae3843b5ca2e1d1062cb00ef9fd.html','',''); });
+$(function(){initNavTree('at__scene_8h.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
 <div class="header">
-  <div class="headertitle"><div class="title">acoustic Directory Reference</div></div>
+  <div class="headertitle"><div class="title">at_scene.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>AT_Scene and related functions.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;at.h&quot;</code><br />
+</div>
+<p><a href="at__scene_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:at_2Eh" id="r_at_2Eh"><td class="memItemLeft"><a href="at_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><b>at.h</b></td></tr>
-<tr class="memitem:at_5Fmath_2Eh" id="r_at_5Fmath_2Eh"><td class="memItemLeft"><a href="at__math_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><a class="el" href="at__math_8h.html">at_math.h</a></td></tr>
-<tr class="memdesc:at__math_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_a_t___triangle.html" title="Groups three AT_Vec3 to represent a triangle.">AT_Triangle</a>, <a class="el" href="struct_a_t___vec3.html" title="Groups three floats to represent a vector of size 3.">AT_Vec3</a> and related functions. <br /></td></tr>
-<tr class="memitem:at_5Fmodel_2Eh" id="r_at_5Fmodel_2Eh"><td class="memItemLeft"><a href="at__model_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><a class="el" href="at__model_8h.html">at_model.h</a></td></tr>
-<tr class="memdesc:at__model_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">AT_Model and related functions. <br /></td></tr>
-<tr class="memitem:at_5Fscene_2Eh" id="r_at_5Fscene_2Eh"><td class="memItemLeft"><a href="at__scene_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><a class="el" href="at__scene_8h.html">at_scene.h</a></td></tr>
-<tr class="memdesc:at__scene_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">AT_Scene and related functions. <br /></td></tr>
-<tr class="memitem:at_5Fsimulation_2Eh" id="r_at_5Fsimulation_2Eh"><td class="memItemLeft"><a href="at__simulation_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight"><a class="el" href="at__simulation_8h.html">at_simulation.h</a></td></tr>
-<tr class="memdesc:at__simulation_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight">AT_Simulation and related functions. <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a396d9232cddc7c05799bdca43526a848" id="r_a396d9232cddc7c05799bdca43526a848"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a396d9232cddc7c05799bdca43526a848">AT_scene_destroy</a> (AT_Scene *scene)</td></tr>
+<tr class="memdesc:a396d9232cddc7c05799bdca43526a848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys an allocated AT_Scene.  <br /></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>AT_Scene and related functions. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a396d9232cddc7c05799bdca43526a848" name="a396d9232cddc7c05799bdca43526a848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a396d9232cddc7c05799bdca43526a848">&#9670;&#160;</a></span>AT_scene_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AT_scene_destroy </td>
+          <td>(</td>
+          <td class="paramtype">AT_Scene *</td>          <td class="paramname"><span class="paramname"><em>scene</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroys an allocated AT_Scene. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scene</td><td>Pointer to an initialised AT_Scene.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">void</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -99,7 +132,7 @@ Files</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>acoustic</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>acoustic</b></li><li class="navelem"><a href="at__scene_8h.html">at_scene.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>
