@@ -2,7 +2,7 @@
 #include "../src/at_internal.h"
 #include "acoustic/at.h"
 
-#define CGLTF_IMPLEMENTATION
+//#define CGLTF_IMPLEMENTATION
 #include "../external/cgltf.h"
 
 #include <stdio.h>
