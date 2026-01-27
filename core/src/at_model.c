@@ -9,15 +9,13 @@
 
 AT_Result AT_model_create(AT_Model **out_model, const char *filepath)
 {
-    if (!out_model || *out_model || !filepath)
-        return AT_ERR_INVALID_ARGUMENT;
+    if (!out_model || *out_model || !filepath) return AT_ERR_INVALID_ARGUMENT;
 
     cgltf_options options = {0};
     cgltf_data *data = NULL;
     cgltf_result res = cgltf_parse_file(&options, filepath, &data);
 
-    if (res != cgltf_result_success)
-        return AT_ERR_INVALID_ARGUMENT;
+    if (res != cgltf_result_success) return AT_ERR_INVALID_ARGUMENT;
 
     res = cgltf_load_buffers(&options, data, filepath);
 
@@ -135,8 +133,7 @@ AT_Result AT_model_create(AT_Model **out_model, const char *filepath)
 
 void AT_model_destroy(AT_Model *model)
 {
-    if (!model)
-        return;
+    if (!model) return;
 
     free(model->vertices);
     free(model->indices);
