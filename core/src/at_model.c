@@ -133,7 +133,7 @@ AT_Result AT_model_create(AT_Model **out_model, const char *filepath)
 
 void AT_model_to_AABB(AT_AABB *aabb, const AT_Model *model)
 {
-    printf("test"); //TODO: implement
+    printf("model to aabb test\n"); //TODO: implement
 }
 
 
