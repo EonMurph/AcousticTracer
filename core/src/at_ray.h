@@ -6,6 +6,7 @@
 #include "../src/at_utils.h"
 
 #include <stdbool.h>
+#include <string.h>
 
 #define AT_RAY_MAX_ENERGY 100.0f
 
@@ -16,24 +17,19 @@ static inline AT_Ray AT_ray_init(
 ) {
 
     AT_Ray ray = {
-        .origin = origin,
-        .direction = AT_vec3_normalize(direction),
-        .energy = AT_RAY_MAX_ENERGY,
-        .total_distance = 0.0f,
-        .ray_id = ray_id,
-        .bounce_count = 0,
+    .origin = origin,
+    .direction = AT_vec3_normalize(direction),
+    .energy = AT_RAY_MAX_ENERGY,
+    .total_distance = 0.0f,
+    .ray_id = ray_id,
+    .bounce_count = 0,
+    .child = NULL
     };
-    AT_da_init(&ray.hits);
 
     return ray;
 }
 
 //da wrapper
-static inline void AT_ray_add_hit(AT_Ray *ray, AT_RayHit hit)
-{
-    AT_da_append(&ray->hits, hit);
-}
-
 static inline AT_Vec3 AT_ray_at(const AT_Ray *ray, float t)
 {
     return (AT_vec3_add(ray->origin, AT_vec3_scale(ray->direction, t)));
@@ -51,12 +47,14 @@ static inline AT_Vec3 AT_ray_reflect(AT_Vec3 incident,
 
 static inline void AT_ray_destroy(AT_Ray *ray)
 {
-    AT_da_free(&ray->hits);
+    if (!ray) return;
+    if (ray->child) AT_ray_destroy(ray->child);
+    free(ray);
 }
 
 
-bool AT_ray_triangle_intersect(const AT_Ray *ray,
+bool AT_ray_triangle_intersect(AT_Ray *ray,
                                const AT_Triangle *triangle,
-                               AT_RayHit *out_hit);
+                               AT_Ray *out_ray);
 
 #endif // AT_RAY_H

@@ -3,14 +3,15 @@
 #include "acoustic/at.h"
 #include "acoustic/at_math.h"
 #include "acoustic/at_model.h"
-#include "../external/raylib.h"
 #include "raylib.h"
+#include "rlgl.h"
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <float.h>
 
-#define MAX_RAYS 50
+#define MAX_RAYS 1
 #define MAX_COLORS_COUNT    21
 
 Color colors[MAX_COLORS_COUNT] = {
@@ -34,7 +35,7 @@ AT_Triangle *AT_model_get_triangles(const AT_Model *model)
 
 int main()
 {
-    const char *filepath = "../assets/glb/L_room.gltf";
+    const char *filepath = "../assets/glb/polygon_room.gltf";
 
     AT_Model *model = NULL;
     if (AT_model_create(&model, filepath) != AT_OK) {
@@ -47,9 +48,9 @@ int main()
     //init rays
     for (uint32_t i = 0; i < MAX_RAYS; i++) {
         rays[i] = AT_ray_init(
-            (AT_Vec3){(float)i*0.05-1, 0.5, 10.0f},
-            (AT_Vec3){i*-0.001, 0.0f, -1.0f},
-            0);
+            (AT_Vec3){0},
+            (AT_Vec3){i*-0.03, 0.1f, -1.0f},
+            i);
     }
 
     uint32_t t_count = model->index_count / 3;
@@ -57,37 +58,19 @@ int main()
 
     //iterate rays
     for (uint32_t i = 0; i < MAX_RAYS; i++) {
-        AT_RayHit hit = {{0}, {0}, FLT_MAX};
-        AT_RayHitList hits;
-        AT_da_init(&hits);
-        for (uint32_t j = 0; j < t_count; j++) {
-            printf("Checking Ray %i\n", i);
-            if (AT_ray_triangle_intersect(&rays[i], &ts[j], &hit)) {
-                //AT_ray_add_hit(&rays[i], hit);
-                AT_da_append(&hits, hit);
-                printf("HIT! Ray %i {%.2f, %.2f, %.2f}\n",
-                    i,
-                    hit.position.x,
-                    hit.position.y,
-                    hit.position.z);
+        AT_Ray *ray = &rays[i];
+        while (true) {
+            AT_Ray closest = AT_ray_init((AT_Vec3){ FLT_MAX, FLT_MAX, FLT_MAX }, (AT_Vec3){0}, 0);
+            bool intersects = false;
+            for (uint32_t j = 0; j < t_count; j++) {
+                if(AT_ray_triangle_intersect(ray, &ts[j], &closest)) intersects = true;
             }
-        }
-        bool min_found = false;
-        AT_RayHit closest_hit;
-        for (uint32_t k = 0; k < hits.count; k++) {
-            float min_dist = FLT_MAX;
-
-            float curr_dist = AT_vec3_distance_sq(closest_hit.position, hits.items[k].position);
-            if (curr_dist < min_dist) {
-                min_dist = curr_dist;
-                closest_hit = hits.items[k];
-                min_found = true;
-            }
-        }
-        if (min_found) {
-            printf("ADDING HIT FOR RAY %i {%.2f, %.2f, %.2f}\n", i,
-                closest_hit.position.x, closest_hit.position.y, closest_hit.position.z);
-            AT_ray_add_hit(&rays[i], closest_hit);
+            if (!intersects) break;
+            AT_Ray *child = malloc(sizeof(AT_Ray));
+            *child = closest;
+            child->child = NULL;
+            ray->child = child;
+            ray = ray->child;
         }
     }
 
@@ -103,10 +86,18 @@ int main()
         .fovy = 60.0f,
         .projection = CAMERA_PERSPECTIVE
     };
+    rlDisableBackfaceCulling();
+
+    uint32_t ssn = 0;
 
     while (!WindowShouldClose())
     {
         UpdateCamera(&camera, CAMERA_FREE);
+        if (IsKeyPressed(KEY_T)) {
+           char filename[64];
+           sprintf(filename, "../assets/images/screenshot_%03d.png", ssn++);
+           TakeScreenshot(filename);
+        }
         BeginDrawing();
         {
             ClearBackground(RAYWHITE);
@@ -120,17 +111,28 @@ int main()
                     rays[i].origin.z},
                     0.1, RED);
 
-                    DrawRay((Ray){
-                    (Vector3){rays[i].origin.x, rays[i].origin.y, rays[i].origin.z},
-                    (Vector3){rays[i].direction.x, rays[i].direction.y, rays[i].direction.z}
-                    }, RED);
+                    AT_Ray *curr = &rays[i];
+                    while (curr->child) {
+                        curr = curr->child;
+                        DrawSphere(
+                            (Vector3){
+                                curr->origin.x,
+                                curr->origin.y,
+                                curr->origin.z,
+                            }, 0.01, BLUE
+                        );
+                        if (curr->child) {
+                            DrawLine3D((Vector3){curr->origin.x, curr->origin.y, curr->origin.z}, (Vector3){curr->child->origin.x, curr->child->origin.y, curr->child->origin.z} , PURPLE);
+                        }
+                    }
 
-                    for (uint32_t j = 0; j < rays[i].hits.count; j++) {
-                        DrawSphere((Vector3){
-                                rays[i].hits.items[j].position.x,
-                                rays[i].hits.items[j].position.y,
-                                rays[i].hits.items[j].position.z},
-                                0.1, RED);
+                    if (rays[i].child) {
+                        DrawLine3D((Vector3){rays[i].origin.x, rays[i].origin.y, rays[i].origin.z}, (Vector3){rays[i].child->origin.x, rays[i].child->origin.y, rays[i].child->origin.z} , RED);
+                    } else {
+                        DrawRay((Ray){
+                        (Vector3){rays[i].origin.x, rays[i].origin.y, rays[i].origin.z},
+                        (Vector3){rays[i].direction.x, rays[i].direction.y, rays[i].direction.z}
+                        }, RED);
                     }
                 }
 
@@ -153,5 +155,8 @@ int main()
     CloseWindow();
     free(ts);
     AT_model_destroy(model);
+    for (uint32_t i = 0; i < MAX_RAYS; i++) {
+       AT_ray_destroy(rays[i].child);
+    }
     return 0;
 }
