@@ -34,6 +34,7 @@
 			}
 		},
 		{
+			"alphaMode":"BLEND",
 			"doubleSided":true,
 			"name":"Material.001",
 			"pbrMetallicRoughness":{
@@ -41,7 +42,7 @@
 					0.800000011920929,
 					0.800000011920929,
 					0.800000011920929,
-					1
+					0.24463516473770142
 				],
 				"metallicFactor":0,
 				"roughnessFactor":0.5
@@ -196,7 +197,7 @@
 	"buffers":[
 		{
 			"byteLength":840,
-			"uri":"box_room.bin"
+			"uri":"box_room_no_roof.bin"
 		}
 	]
 }
