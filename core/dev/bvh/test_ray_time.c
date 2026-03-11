@@ -54,8 +54,9 @@ int main()
 
     struct timespec start_time, end_time;
     FILE *file = fopen("perf_res.txt", "w");
+    int max_rays = 100001;
     for (int bvh = 0; bvh < 2; bvh++) {
-        for (int num_rays = 10; num_rays < 1000001; num_rays *= 10) {
+        for (int num_rays = 10; num_rays < max_rays; num_rays *= 10) {
             settings.num_rays = num_rays;
             sim->num_rays = settings.num_rays;
             sim->rays = (AT_Ray *)calloc(settings.num_rays * scene->num_sources, sizeof(AT_Ray));
@@ -82,6 +83,7 @@ int main()
             free(sim->rays);
         }
         fprintf(file, "\n");
+        max_rays = 1000001;
     }
     fclose(file);
 }
