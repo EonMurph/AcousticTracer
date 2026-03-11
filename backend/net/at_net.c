@@ -378,7 +378,7 @@ void AT_raytracer()
         res = AT_simulation_create(&sim, scene, &settings);
         AT_handle_result(res, "Error creating simulation\n");
 
-        res = AT_simulation_run(sim);
+        res = AT_simulation_run(sim, true);
         AT_handle_result(res, "Error running simulation\n");
 
         uint8_t *result_buf = NULL;
