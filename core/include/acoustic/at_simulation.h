@@ -35,4 +35,4 @@ void AT_simulation_destroy(AT_Simulation *simulation);
 
     \retval AT_Result A result enum value which must be checked for errors.
 */
-AT_Result AT_simulation_run(AT_Simulation *simulation);
+AT_Result AT_simulation_run(AT_Simulation *simulation, bool bvh);

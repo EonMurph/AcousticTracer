@@ -97,7 +97,8 @@ AT_Result AT_simulation_create(
 
 // Runs the actual simulation and updates voxel bins etc..
 AT_Result AT_simulation_run(
-    AT_Simulation *simulation
+    AT_Simulation *simulation,
+    bool bvh
 );
 
 void AT_simulation_destroy(
